@@ -27,6 +27,8 @@ const StartupForm = () => {
         link: formData.get("link") as string,
         pitch,
       };
+      await formSchema.parseAsync(formValues);
+
       const result = await createPitch(prevState, formData, pitch);
 
       if (result.status == "SUCCESS") {
@@ -39,9 +41,9 @@ const StartupForm = () => {
       }
 
       // zod async validation
-      await formSchema.parseAsync(formValues);
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.log(error);
         // flatten -> simplify error
         const fieldErrors = error.flatten().fieldErrors;
         setErrors(fieldErrors as unknown as Record<string, string>);
