@@ -7,15 +7,16 @@ export const formSchema = z.object({
   link: z
     .string()
     .url()
-    .refine(async (url) => {
-      try {
-        const res = await fetch(url, { method: "HEAD" });
-        const contentType = res.headers.get("content-type");
-
-        return contentType?.startsWith("image/");
-      } catch {
-        return false;
-      }
+    .refine((url) => {
+      const imageExtensions = [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".gif",
+        ".webp",
+        ".svg",
+      ];
+      return imageExtensions.some((ext) => url.toLowerCase().endsWith(ext));
     }),
   pitch: z.string().min(10),
 });

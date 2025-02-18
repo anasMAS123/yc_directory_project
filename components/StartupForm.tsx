@@ -27,6 +27,7 @@ const StartupForm = () => {
         link: formData.get("link") as string,
         pitch,
       };
+      console.log(formValues);
       await formSchema.parseAsync(formValues);
 
       const result = await createPitch(prevState, formData, pitch);
