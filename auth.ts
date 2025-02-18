@@ -1,5 +1,5 @@
-import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import NextAuth from "next-auth";
 import { client } from "./sanity/lib/client";
 import { AUTHOR_BY_GITHUB_QUERY } from "./sanity/lib/queries";
 import { writeClient } from "./sanity/lib/write-client";
