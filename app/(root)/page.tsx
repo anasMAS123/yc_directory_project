@@ -4,6 +4,7 @@ import SearchForm from "../../components/SearchForm";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
+import { client } from "@/sanity/lib/client";
 
 export default async function Home({
   searchParams,
@@ -17,7 +18,8 @@ export default async function Home({
   // const posts = await client.fetch(STARTUPS_QUERY);
 
   //this is real time fetch
-  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+  const posts = await client.fetch(STARTUPS_QUERY, params, { useCdn: false });
+  console.log(posts);
 
   // replacer -> null -> function or array that change the returned json
   // space -> 2 ->white space for readability
